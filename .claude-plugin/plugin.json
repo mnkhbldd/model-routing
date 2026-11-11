@@ -1,0 +1,33 @@
+{
+  "name": "model-routing",
+  "version": "1.0.0",
+  "description": "Routes each Claude Code task to the cheapest model that does it well: Haiku for search and tests, Sonnet for edits, Opus for risky reviews. Blocks helpers that would silently run on the main model.",
+  "author": {
+    "name": "Pinecone"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat \"${CLAUDE_PLUGIN_ROOT}/hooks/routing-rules.md\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/require-subagent-model.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

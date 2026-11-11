@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "model-routing",
+  "description": "Team model-routing setup for Claude Code.",
+  "owner": { "name": "Pinecone" },
+  "plugins": [
+    {
+      "name": "model-routing",
+      "description": "Haiku for search and tests, Sonnet for edits, Opus for risky reviews, plus a hook that blocks helpers without a model.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}
